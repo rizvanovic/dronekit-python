@@ -17,10 +17,13 @@ print(" Autopilot Firmware version: %s" % vehicle.version)
 print(" System status: %s" % vehicle.system_status.state)
 #print(" GPS: %s" % vehicle.gps_0)
 #print(" Alt: %s" % vehicle.location.global_relative_frame.alt)
-print("Battery: %s" % vehicle.battery)
+print(" Battery: %s" % vehicle.battery)
 
+input("Press enter to arm. ")
 
+vehicle.armed = True
 
+input("Press enter to disarm. ")
 
 
 
