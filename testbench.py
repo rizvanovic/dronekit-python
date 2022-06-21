@@ -22,6 +22,28 @@ print(" Battery: %s" % vehicle.battery)
 input("Press enter to arm. ")
 
 vehicle.armed = True
+#cmds = vehicle.commands
+#cmds.clear()
+running = True
+while running == True:
+    try:
+        pwm = input("Choose PWM (ALL CHANNELS): ")
+        vehicle.channels.overrides['1'] = pwm
+        vehicle.channels.overrides['2'] = pwm
+        vehicle.channels.overrides['3'] = pwm
+        vehicle.channels.overrides['4'] = pwm
+        vehicle.channels.overrides['5'] = pwm
+        vehicle.channels.overrides['6'] = pwm
+        time.sleep(1)
+    except KeyboardInterrupt:
+        vehicle.channels.overrides['1'] = None
+        vehicle.channels.overrides['2'] = None
+        vehicle.channels.overrides['3'] = None
+        vehicle.channels.overrides['4'] = None
+        vehicle.channels.overrides['5'] = None
+        vehicle.channels.overrides['6'] = None
+        vehicle.armed = False
+        running = False
 
 input("Press enter to disarm. ")
 
