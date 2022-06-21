@@ -45,7 +45,6 @@ while running == True:
         vehicle.armed = False
         running = False
 
-input("Press enter to disarm. ")
 
 
 
