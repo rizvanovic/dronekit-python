@@ -27,7 +27,7 @@ vehicle.armed = True
 running = True
 while running == True:
     try:
-        pwm = input("Choose PWM (ALL CHANNELS): ")
+        pwm = int(input("Choose PWM (ALL CHANNELS): "))
         vehicle.channels.overrides['1'] = pwm
         vehicle.channels.overrides['2'] = pwm
         vehicle.channels.overrides['3'] = pwm
