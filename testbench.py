@@ -31,17 +31,18 @@ def change_throttle(throttle, timeout):
         6,
         0
     )
-    return msg
+    vehicle.send_mavlink(msg)
+    
 #vehicle.send_mavlink(msg)
 
 running = True
-vehicle.mode = VehicleMode('GUIDED')
+vehicle.mode = VehicleMode("GUIDED")
 vehicle.armed = True
 while running == True:
     try:
         tpc = int(input("Choose throttle % : "))
         tt = int(input("For how long?: "))
-        vehicle.send_mavlink(change_throttle(tpc,tt))
+        change_throttle(tpc,tt)
         time.sleep(1)
     except KeyboardInterrupt:
         vehicle.armed = False
