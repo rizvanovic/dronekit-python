@@ -2,7 +2,8 @@
 from dronekit import connect, Command, LocationGlobal, VehicleMode
 from pymavlink import mavutil
 import time, sys, argparse, math
-
+from pymavlink.dialects.v10 import ardupilotmega as mavlink1
+from pymavlink.dialects.v20 import ardupilotmega as mavlink2
 
 # Connect to the Vehicle
 print("Connecting")
