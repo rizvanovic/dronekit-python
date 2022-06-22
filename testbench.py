@@ -24,7 +24,8 @@ vehicle = connect(connection_string, wait_ready=False,baud=57600)
 input("Press enter to arm. ")
 
 def change_throttle(throttle, timeout):
-    msg = vehicle.message_factory.cmd_do_motor_test_encode(
+    msg = vehicle.message_factory.command_long_encode(
+        209,
         6,
         0,
         throttle, #percentage
@@ -32,7 +33,7 @@ def change_throttle(throttle, timeout):
         6,
         0
     )
-    vehicle.ma(msg)
+    vehicle.send_mavlink(msg)
     
 
 
