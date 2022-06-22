@@ -8,7 +8,7 @@ from pymavlink.dialects.v20 import ardupilotmega as mavlink2
 # Connect to the Vehicle
 print("Connecting")
 connection_string = '/dev/ttyS0'
-wait_ready = input("Wait ready, True or False? \n")
+#wait_ready = input("Wait ready, True or False? \n")
 #vehicle = connect(connection_string, wait_ready=False,baud=57600)
 vehicle = mavutil.mavlink_connection(connection_string, baud=57600, dialect = "ardupilotmega")
 #print(" Autopilot Firmware version: %s" % vehicle.version)
@@ -32,7 +32,7 @@ def change_throttle(throttle, timeout):
         6,
         0
     )
-    vehicle.send_mavlink(msg)
+    vehicle.mav.send(msg)
     
 #vehicle.send_mavlink(msg)
 
