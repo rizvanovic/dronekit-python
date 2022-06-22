@@ -43,7 +43,7 @@ def change_throttle(throttle, timeout):
 
 
 running = True
-vehicle.mode = VehicleMode("GUIDED")
+vehicle.mode = VehicleMode("OFFBOARD")
 vehicle.armed = True
 while running == True:
     try:
