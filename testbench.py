@@ -34,9 +34,8 @@ def change_throttle(throttle, timeout):
     return msg
 #vehicle.send_mavlink(msg)
 
-
 running = True
-vehicle.mode("GUIDED")
+vehicle.mode = VehicleMode('GUIDED')
 vehicle.armed = True
 while running == True:
     try:
