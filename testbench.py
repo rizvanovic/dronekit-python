@@ -23,22 +23,11 @@ vehicle = connect(connection_string, wait_ready=False,baud=57600)
 
 input("Press enter to arm. ")
 
-def change_throttle_old(throttle, timeout):
-    msg = vehicle.message_factory.command_long_encode(
-        0,
-        0,
-        mavutil.mavlink.MAV_CMD_DO_MOTOR_TEST,
-        209,
-        6,
-        0,
-        throttle, #percentage
-        0, #seconds
-        6,
-        0,
-        0
-        )
-    
-    vehicle.send_mavlink(msg)
+def PX4setMode(mavMode):
+    vehicle._master.mav.command_long_send(vehicle._master.target_system, vehicle._master.target_component,
+                                               mavutil.mavlink.MAV_CMD_DO_SET_MODE, 0,
+                                               mavMode,
+                                               0, 0, 0, 0, 0, 0)
 
 def change_throttle(throttle):
     msg = vehicle.message_factory.set_position_target_local_ned_encode(
@@ -55,7 +44,9 @@ def change_throttle(throttle):
     vehicle.send_mavlink(msg)
 
 running = True
-vehicle.mode = VehicleMode("OFFBOARD")
+PX4setMode("OFFBOARD")
+sleep(1)
+
 vehicle.armed = True
 while running == True:
     try:
