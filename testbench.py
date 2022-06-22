@@ -2,15 +2,15 @@
 from dronekit import connect, Command, LocationGlobal, VehicleMode
 from pymavlink import mavutil
 import time, sys, argparse, math
-from pymavlink.dialects.v10 import ardupilotmega as mavlink1
-from pymavlink.dialects.v20 import ardupilotmega as mavlink2
+#from pymavlink.dialects.v10 import ardupilotmega as mavlink1
+#from pymavlink.dialects.v20 import ardupilotmega as mavlink2
 
 # Connect to the Vehicle
 print("Connecting")
 connection_string = '/dev/ttyS0'
 #wait_ready = input("Wait ready, True or False? \n")
-#vehicle = connect(connection_string, wait_ready=False,baud=57600)
-vehicle = mavutil.mavlink_connection(connection_string, baud=57600, dialect = "ardupilotmega")
+vehicle = connect(connection_string, wait_ready=False,baud=57600)
+#vehicle = mavutil.mavlink_connection(connection_string, baud=57600, dialect = "ardupilotmega")
 #print(" Autopilot Firmware version: %s" % vehicle.version)
 
 # Display basic vehicle state
@@ -24,7 +24,7 @@ vehicle = mavutil.mavlink_connection(connection_string, baud=57600, dialect = "a
 input("Press enter to arm. ")
 
 def change_throttle(throttle, timeout):
-    msg = mavlink2.MAV_CMD_DO_MOTOR_TEST(
+    msg = vehicle.message_factory.cmd_do_motor_test_encode(
         6,
         0,
         throttle, #percentage
@@ -32,9 +32,9 @@ def change_throttle(throttle, timeout):
         6,
         0
     )
-    vehicle.mav.send(msg)
+    vehicle.ma(msg)
     
-#vehicle.send_mavlink(msg)
+
 
 running = True
 vehicle.mode = VehicleMode("GUIDED")
