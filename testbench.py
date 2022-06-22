@@ -23,7 +23,7 @@ vehicle = connect(connection_string, wait_ready=False,baud=57600)
 
 input("Press enter to arm. ")
 
-def change_throttle(throttle, timeout):
+def change_throttle_old(throttle, timeout):
     msg = vehicle.message_factory.command_long_encode(
         0,
         0,
@@ -32,15 +32,27 @@ def change_throttle(throttle, timeout):
         6,
         0,
         throttle, #percentage
-        timeout, #seconds
+        0, #seconds
         6,
         0,
         0
         )
     
     vehicle.send_mavlink(msg)
-    
 
+def change_throttle(throttle):
+    msg = vehicle.message_factory.set_position_target_local_ned_encode(
+        0,       # time_boot_ms (not used)
+        0, 0,    # target system, target component
+        mavutil.mavlink.MAV_FRAME_LOCAL_NED, # frame
+        0b0000111111000111, # type_mask (only speeds enabled)
+        0, 0, 0, # x, y, z positions (not used)
+        0, 0, 0, # x, y, z velocity in m/s
+        0, 0, throttle, # x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)
+        0, 0)    # yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink)
+
+    
+    vehicle.send_mavlink(msg)
 
 running = True
 vehicle.mode = VehicleMode("OFFBOARD")
@@ -49,15 +61,12 @@ while running == True:
     try:
         tpc = int(input("Choose throttle % : "))
         tt = int(input("For how long?: "))
-        change_throttle(tpc,tt)
-        time.sleep(1)
+        change_throttle(tpc)
+        print(f"Running for {tt} seconds.")
+        time.sleep(tt)
     except KeyboardInterrupt:
         vehicle.armed = False
         running = False
-
-
-msg = mavlink2.MAV_CMD_DO_MOTOR_TEST()
-
 
 
 vehicle.close()
