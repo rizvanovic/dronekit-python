@@ -9,8 +9,8 @@ from pymavlink.dialects.v20 import ardupilotmega as mavlink2
 print("Connecting")
 connection_string = '/dev/ttyS0'
 wait_ready = input("Wait ready, True or False? \n")
-vehicle = connect(connection_string, wait_ready=False,baud=57600)
-
+#vehicle = connect(connection_string, wait_ready=False,baud=57600)
+vehicle = mavutil.mavlink_connection(connection_string, baud=57600, dialect = "ardupilotmega")
 print(" Autopilot Firmware version: %s" % vehicle.version)
 
 # Display basic vehicle state
@@ -24,7 +24,7 @@ print(" Battery: %s" % vehicle.battery)
 input("Press enter to arm. ")
 
 def change_throttle(throttle, timeout):
-    msg = vehicle.message_factory.mav_cmd_do_motor_test_encode(
+    msg = mavlink2.MAV_CMD_DO_MOTOR_TEST(
         6,
         0,
         throttle, #percentage
@@ -50,7 +50,7 @@ while running == True:
         running = False
 
 
-
+msg = mavlink2.MAV_CMD_DO_MOTOR_TEST()
 
 
 
