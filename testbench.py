@@ -20,43 +20,33 @@ print(" System status: %s" % vehicle.system_status.state)
 print(" Battery: %s" % vehicle.battery)
 
 input("Press enter to arm. ")
-print("Read channels individually:")
-print(" Ch1: %s" % vehicle.channels['1'])
-print(" Ch2: %s" % vehicle.channels['2'])
-print(" Ch3: %s" % vehicle.channels['3'])
-print(" Ch4: %s" % vehicle.channels['4'])
-print(" Ch5: %s" % vehicle.channels['5'])
-print(" Ch6: %s" % vehicle.channels['6'])
-print(" Ch7: %s" % vehicle.channels['7'])
-print(" Ch8: %s" % vehicle.channels['8'])
-print("Number of channels: %s" % len(vehicle.channels))
 
-vehicle.armed = True
-#cmds = vehicle.commands
-#cmds.clear()
+def change_throttle(throttle, timeout):
+    msg = vehicle.message_factory.mav_cmd_do_motor_test_encode(
+        6,
+        0,
+        throttle, #percentage
+        timeout, #seconds
+        6,
+        0,
+        0
+    )
+    return msg
+#vehicle.send_mavlink(msg)
+
+
 running = True
+vehicle.mode("GUIDED")
+vehicle.armed = True
 while running == True:
     try:
-        pwm = int(input("Choose PWM (ALL CHANNELS): "))
-        vehicle.channels.overrides['1'] = pwm
-        vehicle.channels.overrides['2'] = pwm
-        vehicle.channels.overrides['3'] = pwm
-        vehicle.channels.overrides['4'] = pwm
-        vehicle.channels.overrides['5'] = pwm
-        vehicle.channels.overrides['6'] = pwm
+        tpc = int(input("Choose throttle % : "))
+        tt = int(input("For how long?: "))
+        vehicle.send_mavlink(change_throttle(tpc,tt))
         time.sleep(1)
     except KeyboardInterrupt:
-        vehicle.channels.overrides['1'] = None
-        vehicle.channels.overrides['2'] = None
-        vehicle.channels.overrides['3'] = None
-        vehicle.channels.overrides['4'] = None
-        vehicle.channels.overrides['5'] = None
-        vehicle.channels.overrides['6'] = None
         vehicle.armed = False
         running = False
-
-
-
 
 
 
