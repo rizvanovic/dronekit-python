@@ -3,6 +3,7 @@ from dronekit import connect, Command, LocationGlobal
 from pymavlink import mavutil
 import time, sys, argparse, math
 
+
 # Connect to the Vehicle
 print("Connecting")
 connection_string = '/dev/ttyS0'
@@ -35,7 +36,7 @@ def change_throttle(throttle, timeout):
 #vehicle.send_mavlink(msg)
 
 running = True
-vehicle.mode = VehicleMode('GUIDED')
+#vehicle.mode = VehicleMode('GUIDED')
 vehicle.armed = True
 while running == True:
     try:
