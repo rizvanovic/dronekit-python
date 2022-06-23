@@ -1,5 +1,5 @@
 # Import DroneKit-Python
-from dronekit import connect, Command, LocationGlobal, VehicleMode
+from dronekit import connect, Command, LocationGlobal
 from pymavlink import mavutil
 import time, sys, argparse, math
 #from pymavlink.dialects.v10 import ardupilotmega as mavlink1
@@ -23,38 +23,31 @@ vehicle = connect(connection_string, wait_ready=False,baud=57600)
 
 input("Press enter to arm. ")
 
-def PX4setMode(mavMode):
-    vehicle._master.mav.command_long_send(vehicle._master.target_system, vehicle._master.target_component,
-                                               mavutil.mavlink.MAV_CMD_DO_SET_MODE, 0,
-                                               mavMode,
-                                               0, 0, 0, 0, 0, 0)
+#def PX4setMode(mavMode):
+#    vehicle._master.mav.command_long_send(vehicle._master.target_system, vehicle._master.target_component,
+#                                               mavutil.mavlink.MAV_CMD_DO_SET_MODE, 0,
+#                                               mavMode,
+#                                               0, 0, 0, 0, 0, 0)
 
 def change_throttle(throttle):
-    msg = vehicle.message_factory.set_position_target_local_ned_encode(
-        0,       # time_boot_ms (not used)
-        0, 0,    # target system, target component
-        mavutil.mavlink.MAV_FRAME_LOCAL_NED, # frame
-        0b0000111111000111, # type_mask (only speeds enabled)
-        0, 0, 0, # x, y, z positions (not used)
-        0, 0, 0, # x, y, z velocity in m/s
-        0, 0, throttle, # x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)
-        0, 0)    # yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink)
+    msg = vehicle.message_factory.command_long_encode(0, 0, mavutil.mavlink.MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES, 0, 1, 0, 0, 0, 0, 0, 0)
 
     
     vehicle.send_mavlink(msg)
 
+
 running = True
-PX4setMode("OFFBOARD")
+#PX4setMode(MAV_MODE_OFFBOARD)
 sleep(1)
 
 vehicle.armed = True
 while running == True:
     try:
         tpc = int(input("Choose throttle % : "))
-        tt = int(input("For how long?: "))
+       # tt = int(input("For how long?: "))
         change_throttle(tpc)
-        print(f"Running for {tt} seconds.")
-        time.sleep(tt)
+       # print(f"Running for {tt} seconds.")
+        #time.sleep(tt)
     except KeyboardInterrupt:
         vehicle.armed = False
         running = False
