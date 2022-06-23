@@ -40,7 +40,7 @@ running = True
 #PX4setMode(MAV_MODE_OFFBOARD)
 time.sleep(1)
 armchoice = input("Arm y/n: ")
-if armchoice == 'y'
+if armchoice == 'y':
     vehicle.armed = True
 while running == True:
     try:
