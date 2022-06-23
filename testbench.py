@@ -33,14 +33,15 @@ def change_throttle(throttle):
     msg = vehicle.message_factory.command_long_encode(
         0, 0,  # target_system, target_component
         mavutil.mavlink.MAV_CMD_DO_MOTOR_TEST, # command
+        0, # confirmation
         1, # instance
         0, # throttle type
-        throttle, #t hrottle value
+        throttle, # throttle value
         0, # timeout
         0, # motor count 
         0, # test order
-        0, # empty
-        0) # empty
+        0  # empty
+        )
 
     
     vehicle.send_mavlink(msg)
