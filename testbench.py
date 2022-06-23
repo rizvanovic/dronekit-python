@@ -39,7 +39,8 @@ def change_throttle(throttle):
         0, # timeout
         0, # motor count 
         0, # test order
-        0) # Empty
+        0, # empty
+        0) # empty
 
     
     vehicle.send_mavlink(msg)
