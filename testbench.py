@@ -62,7 +62,7 @@ while running == True:
         for pwi in range(int(psteps)):
             print(f"pwi {pwi}")
 
-            if pwi == psteps:
+            if pwi == (psteps-1):
                 while True:
                     print(" Last step! Adding rest pow! ")
                     for iNst in range(6):
