@@ -10,6 +10,7 @@ print("Connecting")
 connection_string = '/dev/ttyS0'
 #wait_ready = input("Wait ready, True or False? \n")
 vehicle = connect(connection_string, wait_ready=False,baud=57600)
+time.sleep(5)
 #vehicle = mavutil.mavlink_connection(connection_string, baud=57600, dialect = "ardupilotmega")
 #print(" Autopilot Firmware version: %s" % vehicle.version)
 # Display basic vehicle state
@@ -42,9 +43,7 @@ def change_throttle(throttle):
 running = True
 #PX4setMode(MAV_MODE_OFFBOARD)
 time.sleep(1)
-armchoice = input("Arm y/n: ")
-if armchoice == 'y':
-    vehicle.armed = True
+input("Press enter to start. ")
 while running == True:
     try:
         tpc = int(input("Choose throttle % : "))
