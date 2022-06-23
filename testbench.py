@@ -39,8 +39,9 @@ def change_throttle(throttle):
 running = True
 #PX4setMode(MAV_MODE_OFFBOARD)
 time.sleep(1)
-
-vehicle.armed = True
+armchoice = input("Arm y/n: ")
+if armchoice == 'y'
+    vehicle.armed = True
 while running == True:
     try:
         tpc = int(input("Choose throttle % : "))
