@@ -54,10 +54,10 @@ while running == True:
             motcnt = int(input("Motor count: "))
             sttngche = 'y'
         tpc = int(input("Choose throttle % : "))
-        psteps = tpc % stepsize
-        print(psteps)
-        restpow = tpc - (psteps * stepsize)
+        restpow = tpc  % stepsize
         print(restpow)
+        psteps = (tpc - restpow)/stepsize
+        print(psteps)
         while True:
             for pwi in range(psteps):
                 for iNst in range(6):
