@@ -58,19 +58,21 @@ while running == True:
         print(restpow)
         psteps = (tpc - restpow)/stepsize
         print(psteps)
-        while True:
-            for pwi in range(int(psteps)):
-                print(f"pwi {pwi}")
-                for iNst in range(6):
-                    print(f"iNst {iNst}")
-                    if pwi == 5:
-                        print("Adding rest pow!")
+
+        for pwi in range(int(psteps)):
+            print(f"pwi {pwi}")
+            for iNst in range(6):
+                print(f"iNst {iNst}")
+                if pwi == 5:
+                    print("Adding rest pow!")
+                    while True:
                         change_throttle((pwi+1)*stepsize + restpow, iNst + 1, motcnt)
-                    else:
-                        
-                        change_throttle((pwi+1)*stepsize, iNst + 1, motcnt)
-                time.sleep(2)
-            time.sleep(0.25)
+                        time.sleep(0.25)
+                else:
+                    
+                    change_throttle((pwi+1)*stepsize, iNst + 1, motcnt)
+            time.sleep(2)
+        time.sleep(0.25)
 
 
             
