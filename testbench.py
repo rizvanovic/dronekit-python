@@ -56,7 +56,7 @@ while running == True:
         while True:
             for iNst in range(6):
                 change_throttle(tpc, iNst + 1, motcnt)
-            time.sleep(1)
+            time.sleep(0.25)
         # print(f"Running for {tt} seconds.")
         # time.sleep(tt)
     except KeyboardInterrupt:
