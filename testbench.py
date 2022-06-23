@@ -30,7 +30,7 @@ def change_throttle(throttle):
         0, # throttle type
         throttle, # throttle value
         0, # timeout
-        0, # motor count 
+        6, # motor count 
         0, # test order
         0  # empty
         )
