@@ -46,15 +46,17 @@ sttngchce = 'n'
 time.sleep(1)
 input("Press enter to start. ")
 while running == True:
-    if sttngchce == 'n':
-        iNst = int(input("Instance: "))
-        motcnt = int(input("Motor count: "))
+
     try:
+        if sttngchce == 'n':
+            iNst = int(input("Instance: "))
+            motcnt = int(input("Motor count: "))
+            sttngche = 'y'
         tpc = int(input("Choose throttle % : "))
         change_throttle(tpc, iNst, motcnt)
         time.sleep(1)
-       # print(f"Running for {tt} seconds.")
-        #time.sleep(tt)
+        # print(f"Running for {tt} seconds.")
+        # time.sleep(tt)
     except KeyboardInterrupt:
         print("\n\nKeyboard interrupt: STOPPING NOW.\n\n")
         change_throttle(0)
