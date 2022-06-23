@@ -66,6 +66,7 @@ while running == True:
                     else:
 
                         change_throttle((tpc+1), iNst + 1, motcnt)
+                    time.sleep(2)
             time.sleep(0.25)
 
 
