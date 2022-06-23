@@ -60,7 +60,9 @@ while running == True:
         print(psteps)
         while True:
             for pwi in range(int(psteps)):
+                print(f"pwi {pwi}")
                 for iNst in range(6):
+                    print(f"iNst {iNst}")
                     if pwi == 5:
                         change_throttle((pwi+1)*stepsize + restpow, iNst + 1, motcnt)
                     else:
