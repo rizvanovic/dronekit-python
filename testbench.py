@@ -12,7 +12,6 @@ connection_string = '/dev/ttyS0'
 vehicle = connect(connection_string, wait_ready=False,baud=57600)
 #vehicle = mavutil.mavlink_connection(connection_string, baud=57600, dialect = "ardupilotmega")
 #print(" Autopilot Firmware version: %s" % vehicle.version)
-
 # Display basic vehicle state
 #print(" Type: %s" % vehicle._vehicle_type)
 #print(" Armed: %s" % vehicle.armed)
@@ -21,14 +20,7 @@ vehicle = connect(connection_string, wait_ready=False,baud=57600)
 #print(" Alt: %s" % vehicle.location.global_relative_frame.alt)
 #print(" Battery: %s" % vehicle.battery)
 
-input("Press enter to arm. ")
-
-#def PX4setMode(mavMode):
-#    vehicle._master.mav.command_long_send(vehicle._master.target_system, vehicle._master.target_component,
-#                                               mavutil.mavlink.MAV_CMD_DO_SET_MODE, 0,
-#                                               mavMode,
-#                                               0, 0, 0, 0, 0, 0)
-
+print(f"Aerit test bench, connected to vehicle operating PX4 firmware {vehicle.version}. \n Battery: {vehicle.battery}. ")
 def change_throttle(throttle):
     msg = vehicle.message_factory.command_long_encode(
         0, 0,  # target_system, target_component
@@ -61,7 +53,7 @@ while running == True:
        # print(f"Running for {tt} seconds.")
         #time.sleep(tt)
     except KeyboardInterrupt:
-        vehicle.armed = False
+        change_throttle(0)
         running = False
 
 
