@@ -42,6 +42,7 @@ def change_throttle(throttle, instance, motor_count):
 
 running = True
 sttngchce = 'n'
+stepsize = 5
 #PX4setMode(MAV_MODE_OFFBOARD)
 time.sleep(1)
 input("Press enter to start. ")
@@ -53,12 +54,22 @@ while running == True:
             motcnt = int(input("Motor count: "))
             sttngche = 'y'
         tpc = int(input("Choose throttle % : "))
+        psteps = tpc % stepsize
+        print(psteps)
+        restpow = tpc - (psteps * stepsize)
+        print(restpow)
         while True:
-            for iNst in range(6):
-                change_throttle(tpc, iNst + 1, motcnt)
+            for pwi in range(psteps):
+                for iNst in range(6):
+                    if pwi == 5:
+                        change_throttle((pwi+1)*stepsize + restpow, iNst + 1, motcnt)
+                    else:
+
+                        change_throttle((tpc+1), iNst + 1, motcnt)
             time.sleep(0.25)
-        # print(f"Running for {tt} seconds.")
-        # time.sleep(tt)
+
+
+            
     except KeyboardInterrupt:
         print("\n\nKeyboard interrupt: STOPPING NOW.\n\n")
         for iNst in range(6):
