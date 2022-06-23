@@ -30,7 +30,7 @@ def change_throttle(throttle, instance, motor_count):
         instance, # instance
         0, # throttle type
         throttle, # throttle value
-        0, # timeout
+        3600, # timeout
         motor_count, # motor count 
         0, # test order
         0  # empty
