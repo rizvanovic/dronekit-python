@@ -31,7 +31,7 @@ def change_throttle(throttle):
         0, # throttle type
         throttle, # throttle value
         0, # timeout
-        6, # motor count 
+        0, # motor count 
         0, # test order
         0  # empty
         )
@@ -52,6 +52,7 @@ while running == True:
        # print(f"Running for {tt} seconds.")
         #time.sleep(tt)
     except KeyboardInterrupt:
+        print("\n\nKeyboard interrupt: STOPPING NOW.\n\n")
         change_throttle(0)
         running = False
 
