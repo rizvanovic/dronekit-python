@@ -49,11 +49,12 @@ while running == True:
 
     try:
         if sttngchce == 'n':
-            iNst = int(input("Instance: "))
+            #iNst = int(input("Instance: "))
             motcnt = int(input("Motor count: "))
             sttngche = 'y'
         tpc = int(input("Choose throttle % : "))
-        change_throttle(tpc, iNst, motcnt)
+        for iNst in range(6):
+            change_throttle(tpc, iNst + 1, motcnt)
         time.sleep(1)
         # print(f"Running for {tt} seconds.")
         # time.sleep(tt)
