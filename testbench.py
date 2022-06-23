@@ -38,7 +38,7 @@ def change_throttle(throttle):
 
 running = True
 #PX4setMode(MAV_MODE_OFFBOARD)
-sleep(1)
+time.sleep(1)
 
 vehicle.armed = True
 while running == True:
