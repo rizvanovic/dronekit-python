@@ -30,7 +30,16 @@ input("Press enter to arm. ")
 #                                               0, 0, 0, 0, 0, 0)
 
 def change_throttle(throttle):
-    msg = vehicle.message_factory.command_long_encode(0, 0, mavutil.mavlink.MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES, 0, 1, 0, 0, 0, 0, 0, 0)
+    msg = vehicle.message_factory.command_long_encode(
+        0, 0,  # target_system, target_component
+        mavutil.mavlink.MAV_CMD_DO_MOTOR_TEST, # command
+        1, # instance
+        0, # throttle type
+        throttle, #t hrottle value
+        0, # timeout
+        0, # motor count 
+        0, # test order
+        0) # Empty
 
     
     vehicle.send_mavlink(msg)
