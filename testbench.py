@@ -30,7 +30,7 @@ def change_throttle(throttle, instance, motor_count):
         instance, # instance
         0, # throttle type
         throttle, # throttle value
-        3600, # timeout
+        10, # timeout
         motor_count, # motor count 
         0, # test order
         0  # empty
@@ -53,9 +53,10 @@ while running == True:
             motcnt = int(input("Motor count: "))
             sttngche = 'y'
         tpc = int(input("Choose throttle % : "))
-        for iNst in range(6):
-            change_throttle(tpc, iNst + 1, motcnt)
-        time.sleep(1)
+        while True:
+            for iNst in range(6):
+                change_throttle(tpc, iNst + 1, motcnt)
+            time.sleep(1)
         # print(f"Running for {tt} seconds.")
         # time.sleep(tt)
     except KeyboardInterrupt:
