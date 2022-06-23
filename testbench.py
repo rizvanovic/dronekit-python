@@ -64,10 +64,11 @@ while running == True:
                 for iNst in range(6):
                     print(f"iNst {iNst}")
                     if pwi == 5:
+                        print("Adding rest pow!")
                         change_throttle((pwi+1)*stepsize + restpow, iNst + 1, motcnt)
                     else:
-
-                        change_throttle((tpc+1), iNst + 1, motcnt)
+                        
+                        change_throttle((pwi+1)*stepsize, iNst + 1, motcnt)
                 time.sleep(2)
             time.sleep(0.25)
 
