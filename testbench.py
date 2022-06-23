@@ -61,7 +61,8 @@ while running == True:
         # time.sleep(tt)
     except KeyboardInterrupt:
         print("\n\nKeyboard interrupt: STOPPING NOW.\n\n")
-        change_throttle(0,iNst,motcnt)
+        for iNst in range(6):
+                change_throttle(0, iNst + 1, motcnt)
         time.sleep(1)
         runchoice = input("Would you like to run again? [y/n] ")
         if runchoice == 'n':
