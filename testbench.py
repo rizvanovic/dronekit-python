@@ -26,7 +26,7 @@ def change_throttle(throttle):
         0, 0,  # target_system, target_component
         mavutil.mavlink.MAV_CMD_DO_MOTOR_TEST, # command
         0, # confirmation
-        1, # instance
+        123456, # instance
         0, # throttle type
         throttle, # throttle value
         0, # timeout
