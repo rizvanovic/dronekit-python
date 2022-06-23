@@ -52,6 +52,7 @@ while running == True:
     try:
         tpc = int(input("Choose throttle % : "))
         change_throttle(tpc, iNst, motcnt)
+        time.sleep(1)
        # print(f"Running for {tt} seconds.")
         #time.sleep(tt)
     except KeyboardInterrupt:
