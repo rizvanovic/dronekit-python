@@ -1,5 +1,8 @@
 # DroneKit Python
 
+Note: this was for me to test-run motors in the lab. Nothing that I will continue to work on or try to merge with main.
+
+
 ![dronekit_python_logo](https://cloud.githubusercontent.com/assets/5368500/10805537/90dd4b14-7e22-11e5-9592-5925348a7df9.png)
 
 [![PyPi published version](https://img.shields.io/pypi/v/dronekit.svg)](https://pypi.org/project/dronekit/)
